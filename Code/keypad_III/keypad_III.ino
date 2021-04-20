@@ -2,9 +2,9 @@
 #include "Adafruit_MCP23017.h"
 #include "Adafruit_I2C_Keypad.h"
 
-#define RED_PIN 6
-#define YEL_PIN 7
-#define GRN_PIN 14
+#define RED_PIN 1
+#define YEL_PIN 0
+#define GRN_PIN 9
 
 const byte ROWS = 6;  // rows
 const byte COLS = 6; // columns
@@ -55,31 +55,39 @@ char keys_special[ROWS][COLS] = {
 };
 
 //Inputs/outputs
-byte rowPins[ROWS] = {0, 1, 2, 3, 4, 5};  //connect to the row pinouts of the keypad
-byte colPins[COLS] = {8, 9, 10, 11, 12, 13};  //connect to the column pinouts of the keypad
+byte rowPins[ROWS] = {15, 13, 11, 2, 4, 6};  //connect to the row pinouts of the keypad
+byte colPins[COLS] = {14, 12, 10, 3, 5, 7};  //connect to the column pinouts of the keypad
 
 //Variables
 bool SHIFT = false;
 bool CAP_LOCK = false;
 bool NUM_LOCK = false;
 
+//---------- LCD ----------
+#define BL_PIN 3
+
 //initialize an instance of class MCP23017
-Adafruit_MCP23017 mcp;
+Adafruit_MCP23017 mcp0;
+Adafruit_MCP23017 mcp1;
 //initialize an instance of class NewKeypad
-Adafruit_I2C_Keypad customKeypad = Adafruit_I2C_Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS, &mcp);
+Adafruit_I2C_Keypad customKeypad = Adafruit_I2C_Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS, &mcp0);
 
 void setup() {
   Serial.begin(115200);           //If you change the speed here, the receiver Arduino will also need to change the speed.
-  mcp.begin();
+  mcp0.begin();
   customKeypad.begin();
   
-  mcp.pinMode(RED_PIN, OUTPUT);
-  mcp.pinMode(YEL_PIN, OUTPUT);
-  mcp.pinMode(GRN_PIN, OUTPUT);
+  mcp0.pinMode(RED_PIN, OUTPUT);
+  mcp0.pinMode(YEL_PIN, OUTPUT);
+  mcp0.pinMode(GRN_PIN, OUTPUT);
 
-  mcp.digitalWrite(RED_PIN, LOW);
-  mcp.digitalWrite(YEL_PIN, LOW);
-  mcp.digitalWrite(GRN_PIN, LOW);
+  mcp0.digitalWrite(RED_PIN, LOW);
+  mcp0.digitalWrite(YEL_PIN, LOW);
+  mcp0.digitalWrite(GRN_PIN, LOW);
+
+  mcp1.begin(0x01);
+  mcp1.pinMode(BL_PIN, OUTPUT);
+  mcp1.digitalWrite(BL_PIN, LOW);
 }
 
 void loop() {
@@ -105,13 +113,13 @@ void loop() {
 
     if (SHIFT && e.bit.KEY == 0x02) { // Cap Lock Key
       CAP_LOCK = !CAP_LOCK;
-      mcp.digitalWrite(RED_PIN, CAP_LOCK);
+      mcp0.digitalWrite(RED_PIN, CAP_LOCK);
       continue;
     }
 
     if (SHIFT && e.bit.KEY == 0x03) { // Num Lock Key
       NUM_LOCK = !NUM_LOCK;
-      mcp.digitalWrite(YEL_PIN, NUM_LOCK);
+      mcp0.digitalWrite(YEL_PIN, NUM_LOCK);
       continue;
     }
 
@@ -170,7 +178,9 @@ void loop() {
     }
 
     //Serial.print("row = "); Serial.print(row); Serial.print(" col = "); Serial.println(col);
-    if (key == 0x0D)
+    if(key == 0x00)
+      mcp1.digitalWrite(BL_PIN, !mcp1.digitalRead(BL_PIN));
+    else if (key == 0x0D)
       Serial.println();
     else
       Serial.print((char)key);
