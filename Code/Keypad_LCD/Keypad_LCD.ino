@@ -75,6 +75,7 @@ TeelSys_I2C_Keypad customKeypad = TeelSys_I2C_Keypad( makeKeymap(keys), rowPins,
 SED1520 lcd = SED1520(&mcp1);
 
 void setup() {
+  unsigned long startMillis = millis();
   Serial.begin(115200);           //If you change the speed here, the receiver Arduino will also need to change the speed.
   mcp0.begin();
   customKeypad.begin();
@@ -91,8 +92,15 @@ void setup() {
   mcp1.pinMode(BL_PIN, OUTPUT);
   mcp1.digitalWrite(BL_PIN, LOW);
 
+  
   lcd.begin();
   mcp0.digitalWrite(GRN_PIN, HIGH);
+  unsigned long endMillis = millis();
+  //lcd.WriteString("Hello World");
+  // https://cpp4arduino.com/2020/02/07/how-to-format-strings-without-the-string-class.html
+  char s[32];
+  snprintf(s, sizeof(s), "time = %u ms", endMillis - startMillis);
+  lcd.WriteString(s);
 }
 
 void loop() {
