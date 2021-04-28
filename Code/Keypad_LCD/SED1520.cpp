@@ -7,8 +7,8 @@
 #include "SED1520.h"
 
 
-SED1520::SED1520(Adafruit_MCP23017 *mcp) {
-  _mcp = mcp;
+SED1520::SED1520() {
+
 }
 
 SED1520::~SED1520() {
@@ -19,55 +19,17 @@ void SED1520::begin() {
   Init();
 }
 
-void SED1520::InitPorts() {
-  _mcp->portMode(SED1520_DATA_PORT, OUTPUT);
-  _mcp->portMode(SED1520_CONTROL_PORT, OUTPUT);
-}
-
-void SED1520::WaitForStatus(unsigned char status, unsigned char controller) {
-  char tmp;
-  SetControl(control_pins & ~SED1520_A0);
-  SetControl(control_pins | SED1520_RW);
-  _mcp->portMode(SED1520_DATA_PORT, INPUT);
-  _mcp->writeGPIO(SED1520_DATA_PORT, 0xFF);
-
-  do
-  {
-    if (controller == 0)
-    {
-      SetControl(control_pins | SED1520_E1);
-      tmp = _mcp->readGPIO(SED1520_DATA_PORT);
-      SetControl(control_pins & ~SED1520_E1);
-    }
-    else
-    {
-      SetControl(control_pins | SED1520_E2);
-      tmp = _mcp->readGPIO(SED1520_DATA_PORT);
-      SetControl(control_pins & ~SED1520_E2);
-    }
-  } while (tmp & status);
-
-  _mcp->portMode(SED1520_DATA_PORT, OUTPUT);
-}
-
-void SED1520::WriteCommand(unsigned char commandToWrite, unsigned char ctrl) {
-  WaitForStatus(0x80, ctrl);
-
-  SetControl(control_pins & ~SED1520_A0);
-  SetControl(control_pins & ~SED1520_RW);
-
-  _mcp->writeGPIO(SED1520_DATA_PORT, commandToWrite);
-
-  if (ctrl)
-  {
-    SetControl(control_pins | SED1520_E2);
-    SetControl(control_pins & ~SED1520_E2);
-  }
-  else
-  {
-    SetControl(control_pins | SED1520_E1);
-    SetControl(control_pins & ~SED1520_E1);
-  }
+void SED1520::Init() {
+  InitDisplay();
+  WriteCommand(RESET, 0);
+  WriteCommand(RESET, 1);
+  WaitForStatus(0x10, 0);
+  WaitForStatus(0x10, 1);
+  WriteCommand(DISPLAY_ON, 0);
+  WriteCommand(DISPLAY_ON, 1);
+  WriteCommand(DISPLAY_START_LINE | 0, 0);
+  WriteCommand(DISPLAY_START_LINE | 0, 1);
+  ClearScreen();  
 }
 
 void SED1520::GoTo(unsigned char x, unsigned char y) {
@@ -86,60 +48,6 @@ void SED1520::GoTo(unsigned char x, unsigned char y) {
     WriteCommand(COLUMN_ADDRESS_SET | (lcd_x - (SCREEN_WIDTH / 2)), 1);
     WriteCommand(PAGE_ADDRESS_SET | lcd_y, 1);
   }
-}
-
-void SED1520::WriteData(unsigned char dataToWrite) {
-  WaitForStatus(0x80, 0);
-  WaitForStatus(0x80, 1);
-  SetControl(control_pins | SED1520_A0);
-  SetControl(control_pins & ~SED1520_RW);
-  _mcp->writeGPIO(SED1520_DATA_PORT, dataToWrite);
-
-  if (lcd_x < 61)
-  {
-    SetControl(control_pins | SED1520_E1);
-    SetControl(control_pins & ~SED1520_E1);
-  }
-  else
-  {
-    SetControl(control_pins | SED1520_E2);
-    SetControl(control_pins & ~SED1520_E2);
-  }
-  lcd_x++;
-  if (lcd_x >= SCREEN_WIDTH)
-    lcd_x = 0;
-}
-
-unsigned char SED1520::ReadData() {
-  unsigned char tmp;
-
-  WaitForStatus(0x80, 0);
-  WaitForStatus(0x80, 1);
-  SetControl(control_pins | SED1520_A0);
-  SetControl(control_pins | SED1520_RW);
-  _mcp->portMode(SED1520_DATA_PORT, INPUT);
-  _mcp->writeGPIO(SED1520_DATA_PORT, 0xFF);
-  if (lcd_x < 61)
-  {
-    SetControl(control_pins | SED1520_E1);
-    SetControl(control_pins & ~SED1520_E1);
-    SetControl(control_pins | SED1520_E1);
-    tmp = _mcp->readGPIO(SED1520_DATA_PORT);
-    SetControl(control_pins & ~SED1520_E1);
-  }
-  else
-  {
-    SetControl(control_pins | SED1520_E2);
-    SetControl(control_pins & ~SED1520_E2);
-    SetControl(control_pins | SED1520_E2);
-    tmp = _mcp->readGPIO(SED1520_DATA_PORT);
-    SetControl(control_pins & ~SED1520_E2);
-  }
-  _mcp->portMode(SED1520_DATA_PORT, OUTPUT);
-  lcd_x++;
-  if (lcd_x > 121)
-    lcd_x = 0;
-  return tmp;
 }
 
 void SED1520::ClearScreen() {
@@ -181,20 +89,6 @@ void SED1520::SetPixel(unsigned char x, unsigned char y, unsigned char color) {
     WriteData(temp & ~(1 << (y % 8)));
 }
 
-void SED1520::Init() {
-  InitPorts();
-  GetControl();
-  WriteCommand(RESET, 0);
-  WriteCommand(RESET, 1);
-  WaitForStatus(0x10, 0);
-  WaitForStatus(0x10, 1);
-  WriteCommand(DISPLAY_ON, 0);
-  WriteCommand(DISPLAY_ON, 1);
-  WriteCommand(DISPLAY_START_LINE | 0, 0);
-  WriteCommand(DISPLAY_START_LINE | 0, 1);
-  ClearScreen();
-}
-
 void SED1520::Bitmap(char * bmp, unsigned char x, unsigned char y, unsigned char dx, unsigned char dy) {
   unsigned char i, j;
   for (j = 0; j < dy / 8; j++)
@@ -203,18 +97,4 @@ void SED1520::Bitmap(char * bmp, unsigned char x, unsigned char y, unsigned char
     for (i = 0; i < dx; i++)
       WriteData(pgm_read_byte(bmp++));
   }
-}
-
-unsigned char SED1520::GetControl() {
-  control_pins = _mcp->readGPIO(SED1520_CONTROL_PORT);
-  return control_pins;
-}
-
-void SED1520::SetControl() {
-  SetControl(control_pins);
-}
-
-void SED1520::SetControl(unsigned char ctrl) {
-  control_pins = ctrl;
-  _mcp->writeGPIO(SED1520_CONTROL_PORT, control_pins);
 }

@@ -1,7 +1,8 @@
+// Adapted from: http://en.radzio.dxp.pl/sed1520/
+
 #ifndef _SED1520_H_
 #define _SED1520_H_
 
-#include "Adafruit_MCP23017.h"
 #include "font_5x7.h"
 
 #define DISPLAY_ON 0xAF
@@ -32,30 +33,27 @@
 
 class SED1520 {
   public:
-    SED1520(Adafruit_MCP23017 *mcp);
+    SED1520();
     ~SED1520();
     void begin();
-    void InitPorts();
-    void WaitForStatus(unsigned char status, unsigned char controller);
-    void WriteCommand(unsigned char commandToWrite, unsigned char ctrl);
+    void Init();
     void GoTo(unsigned char x, unsigned char y);
-    void WriteData(unsigned char dataToWrite);
-    unsigned char ReadData();
     void ClearScreen();
     void WriteChar(char c);
     void WriteString(char *s);
     void SetPixel(unsigned char x, unsigned char y, unsigned char color);
-    void Init();
     void Bitmap(char * bmp, unsigned char x, unsigned char y, unsigned char dx, unsigned char dy);
 
-  private:
-    Adafruit_MCP23017 *_mcp;
-    unsigned char lcd_x = 0, lcd_y = 0;
-    unsigned char control_pins = 0;
+    virtual void WaitForStatus(unsigned char status, unsigned char controller) = 0;
+    virtual void WriteCommand(unsigned char commandToWrite, unsigned char ctrl) = 0;
+    virtual void WriteData(unsigned char dataToWrite) = 0;
+    virtual unsigned char ReadData() = 0;
+    
 
-    void SetControl();
-    void SetControl(unsigned char ctrl);
-    unsigned char GetControl();
+  protected:
+    unsigned char lcd_x = 0, lcd_y = 0;
+    
+    virtual void InitDisplay() = 0;
 };
 
 #endif

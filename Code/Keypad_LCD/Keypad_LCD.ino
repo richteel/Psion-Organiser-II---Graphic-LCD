@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include "Adafruit_MCP23017.h"
 #include "TeelSys_I2C_Keypad.h"
-#include "SED1520.h"
+#include "SED1520_128x32_I2C.h"
 
 #define RED_PIN 1
 #define YEL_PIN 0
@@ -72,7 +72,7 @@ Adafruit_MCP23017 mcp0;
 Adafruit_MCP23017 mcp1;
 //initialize an instance of class NewKeypad
 TeelSys_I2C_Keypad customKeypad = TeelSys_I2C_Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS, &mcp0);
-SED1520 lcd = SED1520(&mcp1);
+SED1520_128x32_I2C lcd = SED1520_128x32_I2C(&mcp1);
 
 void setup() {
   unsigned long startMillis = millis();
