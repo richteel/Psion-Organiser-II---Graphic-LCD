@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include "Adafruit_MCP23017.h"
 #include "TeelSys_I2C_Keypad.h"
-#include "SED1520_128x32_I2C.h"
+#include "SED1520_122x32_I2C.h"
 
 #define RED_PIN 1
 #define YEL_PIN 0
@@ -72,14 +72,14 @@ Adafruit_MCP23017 mcp0;
 Adafruit_MCP23017 mcp1;
 //initialize an instance of class NewKeypad
 TeelSys_I2C_Keypad customKeypad = TeelSys_I2C_Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS, &mcp0);
-SED1520_128x32_I2C lcd = SED1520_128x32_I2C(&mcp1);
+SED1520_122x32_I2C lcd = SED1520_122x32_I2C(&mcp1);
 
 void setup() {
   unsigned long startMillis = millis();
   Serial.begin(115200);           //If you change the speed here, the receiver Arduino will also need to change the speed.
   mcp0.begin();
   customKeypad.begin();
-  
+
   mcp0.pinMode(RED_PIN, OUTPUT);
   mcp0.pinMode(YEL_PIN, OUTPUT);
   mcp0.pinMode(GRN_PIN, OUTPUT);
@@ -92,15 +92,34 @@ void setup() {
   mcp1.pinMode(BL_PIN, OUTPUT);
   mcp1.digitalWrite(BL_PIN, LOW);
 
-  
+
   lcd.begin();
+  
   mcp0.digitalWrite(GRN_PIN, HIGH);
   unsigned long endMillis = millis();
-  //lcd.WriteString("Hello World");
-  // https://cpp4arduino.com/2020/02/07/how-to-format-strings-without-the-string-class.html
+
+  lcd.GoTo(2, 0);
+  lcd.WriteString("Hello World");
+  
   char s[32];
+  // https://cpp4arduino.com/2020/02/07/how-to-format-strings-without-the-string-class.html
   snprintf(s, sizeof(s), "time = %u ms", endMillis - startMillis);
+  lcd.GoTo(2, 1);
   lcd.WriteString(s);
+  
+  lcd.GoTo(2, 2);
+  lcd.WriteString("Line 3");
+  
+  lcd.GoTo(2, 3);
+  lcd.WriteString("Line 4");
+
+  lcd.Rectangle(0, 0, 122, 32);
+  
+  lcd.Circle(110, 10, 5);
+  
+  lcd.Line(110, 10, 45, 22);
+  
+  lcd.Circle(45, 22, 5);
 }
 
 void loop() {
@@ -191,7 +210,7 @@ void loop() {
     }
 
     //Serial.print("row = "); Serial.print(row); Serial.print(" col = "); Serial.println(col);
-    if(key == 0x00)
+    if (key == 0x00)
       mcp1.digitalWrite(BL_PIN, !mcp1.digitalRead(BL_PIN));
     else if (key == 0x0D)
       Serial.println();

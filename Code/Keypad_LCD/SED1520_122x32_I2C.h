@@ -1,13 +1,13 @@
-#ifndef _SED1520_128x32_I2C_H_
-#define _SED1520_128x32_I2C_H_
+#ifndef _SED1520_122x32_I2C_H_
+#define _SED1520_122x32_I2C_H_
 
 #include "Adafruit_MCP23017.h"
 #include "SED1520.h"
 
-class SED1520_128x32_I2C : public SED1520 {
+class SED1520_122x32_I2C : public SED1520 {
   public:
-    SED1520_128x32_I2C(Adafruit_MCP23017 *mcp);
-    ~SED1520_128x32_I2C();
+    SED1520_122x32_I2C(Adafruit_MCP23017 *mcp);
+    ~SED1520_122x32_I2C();
 
     void WaitForStatus(unsigned char status, unsigned char controller);
     void WriteCommand(unsigned char commandToWrite, unsigned char ctrl);

@@ -48,12 +48,20 @@ class SED1520 {
     virtual void WriteCommand(unsigned char commandToWrite, unsigned char ctrl) = 0;
     virtual void WriteData(unsigned char dataToWrite) = 0;
     virtual unsigned char ReadData() = 0;
-    
+
+    // Graphics
+    void Rectangle(unsigned char x, unsigned char y, unsigned char b, unsigned char a);
+    void Circle(unsigned char cx, unsigned char cy , unsigned char radius);
+    void Line(unsigned int X1, unsigned int Y1, unsigned int X2, unsigned int Y2);
+
+    unsigned char color = 1;
 
   protected:
     unsigned char lcd_x = 0, lcd_y = 0;
-    
+
     virtual void InitDisplay() = 0;
+
+    // Graphics
 };
 
 #endif
