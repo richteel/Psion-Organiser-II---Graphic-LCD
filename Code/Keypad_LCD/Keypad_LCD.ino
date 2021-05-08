@@ -1,7 +1,8 @@
 #include <Wire.h>
 #include "Adafruit_MCP23017.h"
+#include "TeelSys_MCP23S17.h"
 #include "TeelSys_I2C_Keypad.h"
-#include "SED1520_122x32_I2C.h"
+#include "SED1520_122x32_SPI.h"
 
 #define RED_PIN 1
 #define YEL_PIN 0
@@ -65,14 +66,16 @@ bool CAP_LOCK = false;
 bool NUM_LOCK = false;
 
 //---------- LCD ----------
-#define BL_PIN 6
+#define BL_PIN 6  // Backlight
+//------ LCD MCP23S17 -----
+#define SS_PIN 17  // ChipSelect (SS)
 
 //initialize an instance of class MCP23017
 Adafruit_MCP23017 mcp0;
-Adafruit_MCP23017 mcp1;
+TeelSys_MCP23S17 mcp1;
 //initialize an instance of class NewKeypad
 TeelSys_I2C_Keypad customKeypad = TeelSys_I2C_Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS, &mcp0);
-SED1520_122x32_I2C lcd = SED1520_122x32_I2C(&mcp1);
+SED1520_122x32_SPI lcd = SED1520_122x32_SPI(&mcp1);
 
 void setup() {
   unsigned long startMillis = millis();
@@ -88,7 +91,7 @@ void setup() {
   mcp0.digitalWrite(YEL_PIN, LOW);
   mcp0.digitalWrite(GRN_PIN, LOW);
 
-  mcp1.begin(0x01);
+  mcp1.begin(0, SS_PIN);
   mcp1.pinMode(BL_PIN, OUTPUT);
   mcp1.digitalWrite(BL_PIN, LOW);
 

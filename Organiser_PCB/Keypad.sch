@@ -219,32 +219,6 @@
 <wire x1="57.65" y1="4.1" x2="1.35" y2="4.1" width="0" layer="21"/>
 <wire x1="1.35" y1="4.1" x2="1.35" y2="23.5" width="0" layer="21"/>
 </package>
-<package name="HEADER-1X12-KEYPAD">
-<pad name="COL_3" x="0" y="1.27" drill="0.8" shape="long"/>
-<pad name="ROW_4" x="0" y="-1.27" drill="0.8" shape="long"/>
-<pad name="ROW_3" x="0" y="3.81" drill="0.8" shape="long"/>
-<pad name="COL_2" x="0" y="6.35" drill="0.8" shape="long"/>
-<pad name="ROW_2" x="0" y="8.89" drill="0.8" shape="long"/>
-<pad name="COL_1" x="0" y="11.43" drill="0.8" shape="long"/>
-<pad name="ROW_1" x="0" y="13.97" drill="0.8" shape="long"/>
-<pad name="COL_4" x="0" y="-3.81" drill="0.8" shape="long"/>
-<pad name="ROW_5" x="0" y="-6.35" drill="0.8" shape="long"/>
-<pad name="COL_5" x="0" y="-8.89" drill="0.8" shape="long"/>
-<pad name="ROW_6" x="0" y="-11.43" drill="0.8" shape="long"/>
-<pad name="COL_6" x="0" y="-13.97" drill="0.8" shape="long"/>
-<text x="2.54" y="-13.97" size="0.8128" layer="21" align="center-left">C6</text>
-<text x="2.54" y="-11.43" size="0.8128" layer="21" align="center-left">R6</text>
-<text x="2.54" y="-8.89" size="0.8128" layer="21" align="center-left">C5</text>
-<text x="2.54" y="-6.35" size="0.8128" layer="21" align="center-left">R5</text>
-<text x="2.54" y="-3.81" size="0.8128" layer="21" align="center-left">C4</text>
-<text x="2.54" y="-1.27" size="0.8128" layer="21" align="center-left">R4</text>
-<text x="2.54" y="1.27" size="0.8128" layer="21" align="center-left">C3</text>
-<text x="2.54" y="3.81" size="0.8128" layer="21" align="center-left">R3</text>
-<text x="2.54" y="6.35" size="0.8128" layer="21" align="center-left">C2</text>
-<text x="2.54" y="8.89" size="0.8128" layer="21" align="center-left">R2</text>
-<text x="2.54" y="11.43" size="0.8128" layer="21" align="center-left">C1</text>
-<text x="2.54" y="13.97" size="0.8128" layer="21" align="center-left">R1</text>
-</package>
 <package name="HEADER-1X18-LCD">
 <pad name="DB2" x="1.27" y="0" drill="0.8" shape="long" rot="R90"/>
 <pad name="DB1" x="-1.27" y="0" drill="0.8" shape="long" rot="R90"/>
@@ -1479,20 +1453,6 @@
 <pin name="VEE" x="83.82" y="27.94" length="middle" rot="R270"/>
 <pin name="NC" x="88.9" y="27.94" length="middle" rot="R270"/>
 </symbol>
-<symbol name="HEADER-1X12-KEYPAD">
-<pin name="COL_6" x="0" y="-27.94" visible="pad" length="middle"/>
-<pin name="ROW_5" x="0" y="-12.7" visible="pad" length="middle"/>
-<pin name="COL_5" x="0" y="-17.78" visible="pad" length="middle"/>
-<pin name="COL_4" x="0" y="-7.62" visible="pad" length="middle"/>
-<pin name="ROW_4" x="0" y="-2.54" visible="pad" length="middle"/>
-<pin name="COL_3" x="0" y="2.54" visible="pad" length="middle"/>
-<pin name="ROW_3" x="0" y="7.62" visible="pad" length="middle"/>
-<pin name="COL_2" x="0" y="12.7" visible="pad" length="middle"/>
-<pin name="ROW_2" x="0" y="17.78" visible="pad" length="middle"/>
-<pin name="COL_1" x="0" y="22.86" visible="pad" length="middle"/>
-<pin name="ROW_1" x="0" y="27.94" visible="pad" length="middle"/>
-<pin name="ROW_6" x="0" y="-22.86" visible="pad" length="middle"/>
-</symbol>
 <symbol name="HEADER-1X18-LCD">
 <pin name="DB7" x="0" y="-27.94" visible="pad" length="middle"/>
 <pin name="DB4" x="0" y="-12.7" visible="pad" length="middle"/>
@@ -1607,32 +1567,6 @@ LETTER landscape</description>
 <connect gate="G$1" pin="VDD" pad="VDD"/>
 <connect gate="G$1" pin="VEE" pad="VEE"/>
 <connect gate="G$1" pin="VO" pad="VO"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="HEADER-1X12-KEYPAD">
-<gates>
-<gate name="G$1" symbol="HEADER-1X12-KEYPAD" x="5.08" y="-33.02"/>
-</gates>
-<devices>
-<device name="" package="HEADER-1X12-KEYPAD">
-<connects>
-<connect gate="G$1" pin="COL_1" pad="COL_1"/>
-<connect gate="G$1" pin="COL_2" pad="COL_2"/>
-<connect gate="G$1" pin="COL_3" pad="COL_3"/>
-<connect gate="G$1" pin="COL_4" pad="COL_4"/>
-<connect gate="G$1" pin="COL_5" pad="COL_5"/>
-<connect gate="G$1" pin="COL_6" pad="COL_6"/>
-<connect gate="G$1" pin="ROW_1" pad="ROW_1"/>
-<connect gate="G$1" pin="ROW_2" pad="ROW_2"/>
-<connect gate="G$1" pin="ROW_3" pad="ROW_3"/>
-<connect gate="G$1" pin="ROW_4" pad="ROW_4"/>
-<connect gate="G$1" pin="ROW_5" pad="ROW_5"/>
-<connect gate="G$1" pin="ROW_6" pad="ROW_6"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -5795,7 +5729,6 @@ Source: http://ww1.microchip.com/downloads/en/DeviceDoc/21952a.pdf</description>
 <part name="SUPPLY2" library="supply2" deviceset="+5V" device=""/>
 <part name="SUPPLY3" library="supply2" deviceset="GND" device=""/>
 <part name="U$73" library="teelsys-0.2" deviceset="LCD_CFAL12832A022" device=""/>
-<part name="U$37" library="teelsys-0.2" deviceset="HEADER-1X12-KEYPAD" device=""/>
 <part name="U$38" library="teelsys-0.2" deviceset="HEADER-1X18-LCD" device=""/>
 <part name="LED1" library="teelsys-0.2" deviceset="LED" device="" value="RED"/>
 <part name="LED2" library="teelsys-0.2" deviceset="LED" device="" value="Green"/>
@@ -6268,7 +6201,6 @@ Source: http://ww1.microchip.com/downloads/en/DeviceDoc/21952a.pdf</description>
 <instance part="SUPPLY2" gate="+5V" x="43.18" y="76.2"/>
 <instance part="SUPPLY3" gate="GND" x="20.32" y="30.48"/>
 <instance part="U$73" gate="G$1" x="30.48" y="12.7"/>
-<instance part="U$37" gate="G$1" x="205.74" y="132.08"/>
 <instance part="U$38" gate="G$1" x="76.2" y="66.04" rot="R90"/>
 <instance part="LED1" gate="G$1" x="187.96" y="86.36"/>
 <instance part="LED2" gate="G$1" x="187.96" y="73.66"/>
@@ -6338,22 +6270,12 @@ Source: http://ww1.microchip.com/downloads/en/DeviceDoc/21952a.pdf</description>
 </net>
 <net name="ROW_1" class="0">
 <segment>
-<pinref part="U$37" gate="G$1" pin="ROW_1"/>
-<wire x1="205.74" y1="160.02" x2="198.12" y2="160.02" width="0.1524" layer="91"/>
-<label x="198.12" y="160.02" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
 <pinref part="IC1" gate="G$1" pin="GPA0"/>
 <wire x1="96.52" y1="162.56" x2="104.14" y2="162.56" width="0.1524" layer="91"/>
 <label x="104.14" y="162.56" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="COL_1" class="0">
-<segment>
-<pinref part="U$37" gate="G$1" pin="COL_1"/>
-<wire x1="205.74" y1="154.94" x2="198.12" y2="154.94" width="0.1524" layer="91"/>
-<label x="198.12" y="154.94" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPB0"/>
 <wire x1="96.52" y1="139.7" x2="104.14" y2="139.7" width="0.1524" layer="91"/>
@@ -6362,22 +6284,12 @@ Source: http://ww1.microchip.com/downloads/en/DeviceDoc/21952a.pdf</description>
 </net>
 <net name="ROW_2" class="0">
 <segment>
-<pinref part="U$37" gate="G$1" pin="ROW_2"/>
-<wire x1="205.74" y1="149.86" x2="198.12" y2="149.86" width="0.1524" layer="91"/>
-<label x="198.12" y="149.86" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
 <pinref part="IC1" gate="G$1" pin="GPA1"/>
 <wire x1="96.52" y1="160.02" x2="121.92" y2="160.02" width="0.1524" layer="91"/>
 <label x="121.92" y="160.02" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="COL_2" class="0">
-<segment>
-<pinref part="U$37" gate="G$1" pin="COL_2"/>
-<wire x1="205.74" y1="144.78" x2="198.12" y2="144.78" width="0.1524" layer="91"/>
-<label x="198.12" y="144.78" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPB1"/>
 <wire x1="96.52" y1="137.16" x2="121.92" y2="137.16" width="0.1524" layer="91"/>
@@ -6386,22 +6298,12 @@ Source: http://ww1.microchip.com/downloads/en/DeviceDoc/21952a.pdf</description>
 </net>
 <net name="ROW_3" class="0">
 <segment>
-<pinref part="U$37" gate="G$1" pin="ROW_3"/>
-<wire x1="205.74" y1="139.7" x2="198.12" y2="139.7" width="0.1524" layer="91"/>
-<label x="198.12" y="139.7" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
 <pinref part="IC1" gate="G$1" pin="GPA2"/>
 <wire x1="96.52" y1="157.48" x2="104.14" y2="157.48" width="0.1524" layer="91"/>
 <label x="104.14" y="157.48" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="COL_3" class="0">
-<segment>
-<pinref part="U$37" gate="G$1" pin="COL_3"/>
-<wire x1="205.74" y1="134.62" x2="198.12" y2="134.62" width="0.1524" layer="91"/>
-<label x="198.12" y="134.62" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPB2"/>
 <wire x1="96.52" y1="134.62" x2="104.14" y2="134.62" width="0.1524" layer="91"/>
@@ -6410,22 +6312,12 @@ Source: http://ww1.microchip.com/downloads/en/DeviceDoc/21952a.pdf</description>
 </net>
 <net name="ROW_4" class="0">
 <segment>
-<pinref part="U$37" gate="G$1" pin="ROW_4"/>
-<wire x1="205.74" y1="129.54" x2="198.12" y2="129.54" width="0.1524" layer="91"/>
-<label x="198.12" y="129.54" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
 <pinref part="IC1" gate="G$1" pin="GPA3"/>
 <wire x1="96.52" y1="154.94" x2="121.92" y2="154.94" width="0.1524" layer="91"/>
 <label x="121.92" y="154.94" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="COL_4" class="0">
-<segment>
-<pinref part="U$37" gate="G$1" pin="COL_4"/>
-<wire x1="205.74" y1="124.46" x2="198.12" y2="124.46" width="0.1524" layer="91"/>
-<label x="198.12" y="124.46" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPB3"/>
 <wire x1="96.52" y1="132.08" x2="121.92" y2="132.08" width="0.1524" layer="91"/>
@@ -6434,22 +6326,12 @@ Source: http://ww1.microchip.com/downloads/en/DeviceDoc/21952a.pdf</description>
 </net>
 <net name="ROW_5" class="0">
 <segment>
-<pinref part="U$37" gate="G$1" pin="ROW_5"/>
-<wire x1="205.74" y1="119.38" x2="198.12" y2="119.38" width="0.1524" layer="91"/>
-<label x="198.12" y="119.38" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
 <pinref part="IC1" gate="G$1" pin="GPA4"/>
 <wire x1="96.52" y1="152.4" x2="104.14" y2="152.4" width="0.1524" layer="91"/>
 <label x="104.14" y="152.4" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="COL_5" class="0">
-<segment>
-<pinref part="U$37" gate="G$1" pin="COL_5"/>
-<wire x1="205.74" y1="114.3" x2="198.12" y2="114.3" width="0.1524" layer="91"/>
-<label x="198.12" y="114.3" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPB4"/>
 <wire x1="96.52" y1="129.54" x2="104.14" y2="129.54" width="0.1524" layer="91"/>
@@ -6458,22 +6340,12 @@ Source: http://ww1.microchip.com/downloads/en/DeviceDoc/21952a.pdf</description>
 </net>
 <net name="ROW_6" class="0">
 <segment>
-<pinref part="U$37" gate="G$1" pin="ROW_6"/>
-<wire x1="205.74" y1="109.22" x2="198.12" y2="109.22" width="0.1524" layer="91"/>
-<label x="198.12" y="109.22" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
 <pinref part="IC1" gate="G$1" pin="GPA5"/>
 <wire x1="96.52" y1="149.86" x2="121.92" y2="149.86" width="0.1524" layer="91"/>
 <label x="121.92" y="149.86" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="COL_6" class="0">
-<segment>
-<pinref part="U$37" gate="G$1" pin="COL_6"/>
-<wire x1="205.74" y1="104.14" x2="198.12" y2="104.14" width="0.1524" layer="91"/>
-<label x="198.12" y="104.14" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPB5"/>
 <wire x1="96.52" y1="127" x2="121.92" y2="127" width="0.1524" layer="91"/>
