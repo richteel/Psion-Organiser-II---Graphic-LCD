@@ -1,0 +1,33 @@
+# Menu file for Modern Psion Organizer II
+# Author: Richard Teel
+# Date: 9 May 2021
+
+[Menu]
+Icon = data.hin
+Command =data
+Title=DATA
+Hotkey = D
+
+[Menu]
+Icon = calculator.hin
+Command=Calculator
+Title=CALC
+Hotkey = C
+
+[Menu]
+Icon = time
+Command = Time
+Title = TIME
+Hotkey = T
+
+[Menu]
+Icon = Info
+Command = Info
+Title = INFO
+Hotkey = I
+
+[Menu]
+Icon = setting
+Command = Setting
+Title = SETT
+Hotkey = S

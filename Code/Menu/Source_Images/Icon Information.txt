@@ -1,0 +1,25 @@
+-------------------------------
+Font
+-------------------------------
+Font Family: Arial
+Font Size: 12 Point
+Bold
+
+-------------------------------
+Size
+-------------------------------
+Width: 34 pixels
+Height: 32 pixels
+Colors: 2
+
+
+-------------------------------
+Transform to Byte Array
+-------------------------------
+SOURCE: https://forum.arduino.cc/t/u8glib-and-bitmap-creation-display/148125
+1. Load your picture into gimp
+2. Convert it into a indexed bitmap, 2 levels, black & white, maybe use dithering
+	Image > Mode > Indexed
+		Colormap: Use black and white (1-bit) palette
+		Dithering: None if already 2 color
+3. Export as XBM (.xbm extension)
