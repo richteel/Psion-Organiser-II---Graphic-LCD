@@ -30,6 +30,7 @@ Here are some photos taken of the sample code running the display.
 
 <img alt="April's Fools Joke showing Psion II Organizer with Series 3 Icons" src="https://github.com/richteel/Psion-Organiser-II---Graphic-LCD/blob/main/Code/sketch_April_Fools/Facebook/Boot03.png?raw=true" />
 
+<a href="https://github.com/richteel/Psion-Organiser-II---Graphic-LCD/blob/main/Code/sketch_April_Fools/Facebook/Psion%20April%20Fools.mp4?raw=true">Video of source code running</a>
 
 <video width="320" height="240" controls>
   <source src="https://github.com/richteel/Psion-Organiser-II---Graphic-LCD/blob/main/Code/sketch_April_Fools/Facebook/Psion%20April%20Fools.mp4?raw=true" type="video/mp4">
